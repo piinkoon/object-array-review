@@ -8,12 +8,15 @@ function setup() {
     x: random(width),
     y: random(50),
     dy: 0,
+
     
   }
   ball1 = {
     x: random(width),
     y: random(50),
     dy: 0,
+
+
     
 
   }
