@@ -1,41 +1,80 @@
-let ball = ['ball0', 'ball1'];
+let ball = [];
+let square = [];
 
-// let ball0;
-// let ball1;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  ball0 = {
-    x: random(width),
-    y: random(50),
-    dy: 0,
-
-    
+  for (let i = 0; i < 50; i++) {
+    ball[i] = new Ball();
   }
-  ball1 = {
-    x: random(width),
-    y: random(50),
-    dy: 0,
 
-
-    
-
+  for (let i = 0; i < 50; i++) {
+    square[i] = new Square();
   }
 }
+
 function draw() {
-  background(200);
-  ball0.y += ball0.dy;
-  ball0.dy += 0.25;
-  circle(ball0.x, ball0.y, 50);
-  ball1.y += ball1.dy;
-  ball1.dy += 0.25;
-  circle(ball1.x, ball1.y, 50);
-  // if the object hits the bottom of the canvas
-  // make it go up instead of down
-  if (ball0.y >= height) {
-    ball0.dy = -0.95 * ball0.dy;
+
+  background(134, 156, 118);
+  for (let i = 0; i < 50; i++) {
+    ball[i].move();
+    ball[i].display();
+    ball[i].update();
   }
-  if (ball1.y >= height) {
-    ball1.dy = -0.95 * ball1.dy;
+
+  for (let i = 0; i < 50; i++) {
+    square[i].move();
+    square[i].display();
+    square[i].update();
+  }
+
+}
+
+
+class Ball {
+  constructor() {
+    this.x = random(height);
+    this.y = random(width);
+    this.size = random(30, 100);
+    this.speedx = random(-3, 3);
+  }
+
+  update() {
+    if (this.x < 0 || this.x > windowWidth) {
+      this.speedx = this.speedx * -1
+    }
+  }
+  move() {
+    this.x += this.speedx
+
+
+  }
+  display() {
+    fill(184, 99, 39, 90);
+    ellipse(this.x, this.y, this.size);
   }
 }
 
+  class Square {
+    constructor() {
+      this.x = random(height);
+      this.y = random(width);
+      this.size = random(30, 100);
+      this.speedx = random(-3, 3);
+    }
+  
+    update() {
+      if (this.x < 0 || this.x > windowWidth) {
+        this.speedx = this.speedx * -1
+      }
+    }
+    move() {
+      this.x += this.speedx
+  
+    }
+    display() {
+      fill(65, 88, 125, 90);
+      rect(this.x, this.y, this.size, this.size);
+    }
+
+}
